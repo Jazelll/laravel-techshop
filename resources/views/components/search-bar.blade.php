@@ -1,5 +1,6 @@
 
 <form action="{{ route($route) }}" method="GET" class="d-flex" role="search">
-    <input class="form-control me-2" name="search" type="text" value="{{ request('search') }}" placeholder="{{ $placeholder }}">
-    <button class="btn btn-outline-success" style="width: 8em" type="submit">Search</button>
+    <input class="form-control " name="search" type="text" value="{{ request('search') }}" placeholder="{{ $placeholder }}">
+    <button class="btn" style="width: 3em" type="submit"><i class="bi bi-search"></i></button>
 </form>
+

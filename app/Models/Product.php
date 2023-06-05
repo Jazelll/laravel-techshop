@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Cart;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
@@ -14,7 +15,7 @@ class Product extends Model
         'unit_price',
         'category',
         'image_url',
-        'user_id',
+        'availableQty',
         // add all other fields
     ];
 
@@ -50,6 +51,27 @@ class Product extends Model
 
     public function user(){
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function favorites()
+    {
+        return $this->hasMany(Favorites::class);
+    }
+
+    public function cart()
+    {
+        return $this->hasMany(Cart::class);
+    }
+
+
+    public function isLikedByUser($userId)
+    {
+        return $this->favorites()->where('user_id', $userId)->exists();
+    }
+
+    public function isAddedtoCart($userId)
+    {
+        return $this->cart()->where('user_id', $userId)->exists();
     }
 
 }

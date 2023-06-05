@@ -51,6 +51,17 @@
                                 </li>
                             @endif
                         @else
+
+                        @if (Auth::user()->role != 'admin')
+                            {{-- PLACE THE HEART AND CART HEREEEEE --}}
+                            <li class="nav-item">
+                                <a class="nav-link " href="/favorites"><i class="bi bi-suit-heart"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="/cart"><i class="bi bi-cart3"></i></a>
+                            </li>
+                        @endif
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     Welcome {{Auth::user()->role }}, {{ ucfirst(Auth::user()->name) }}!
@@ -81,55 +92,6 @@
                                         <form id="home-form" action="{{ route('user.home') }}" method="POST" class="d-none">
                                             @csrf
                                         </form>
-
-                                    {{-- MERCHANT DROPDOWN --}}
-                                    {{-- Merchant, who is also a user, can view, create, and manage product but can only manage the products he uploaded.--}}
-
-                                    {{-- @elseif (Auth::user()->role == 'merchant')
-                                        <a class="dropdown-item" href="{{ route('user.home') }}"
-                                                onclick="event.preventDefault();
-                                                    document.getElementById('home-form').submit();">
-                                            {{ __('Go to Home') }}
-                                        </a>
-
-                                        <form id="home-form" action="{{ route('user.home') }}" method="POST" class="d-none">
-                                            @csrf
-                                        </form>
-
-                                        <a class="dropdown-item" href="{{ route('create') }}"
-                                                onclick="event.preventDefault();
-                                                    document.getElementById('create-form').submit();">
-                                            {{ __('Create Product') }}
-                                        </a>
-
-                                        <form id="create-form" action="{{ route('create') }}" method="POST" class="d-none">
-                                            @csrf
-                                        </form>
-
-                                        <a class="dropdown-item" href="{{ route('manage') }}"
-                                                onclick="event.preventDefault();
-                                                    document.getElementById('manage-form').submit();">
-                                            {{ __('Manage Product') }}
-                                        </a>
-
-                                        <form id="manage-form" action="{{ route('manage') }}" method="POST" class="d-none">
-                                            @csrf
-                                        </form> --}}
-                                    
-                                    {{-- USER DROPDOWN ->> LOGOUT --}}
-                                    {{-- User can only see the products, add to cart, and checkout, he cannot manage nor create products. --}}
-
-                                    {{-- @else 
-                                        
-                                        <a class="dropdown-item" href="{{ route('user.home') }}"
-                                                onclick="event.preventDefault();
-                                                    document.getElementById('home-form').submit();">
-                                            {{ __('Go to Home') }}
-                                        </a>
-
-                                        <form id="home-form" action="{{ route('user.home') }}" method="POST" class="d-none">
-                                            @csrf
-                                        </form> --}}
 
                                     @endif
 
@@ -167,6 +129,7 @@
             text-decoration: none;
             color: black;
         }
+        
         .no-wrap{
             white-space: nowrap;
         }
@@ -174,7 +137,6 @@
             text-decoration: none;
             color: black;
         }
-        
 
         .category-container {
             display:inline-block;

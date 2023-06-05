@@ -83,6 +83,16 @@
                       @enderror
                     </div>
                   </div>
+
+                  <div class="mb-3 row">
+                    <label for="availableQty" class="col-sm-2 col-form-label">Available Quantity</label>
+                    <div class="col-sm-10">
+                      <input type="number" name="availableQty" class="form-control" value = {{ old('availableQty') }}>
+                      @error("availableQty")
+                          <p class="text-danger">{{$message}}</p>
+                      @enderror
+                    </div>
+                  </div>
                 
                   <div class="mb-3 row">
                     <label for="category" class="col-sm-2 col-form-label">Category</label>

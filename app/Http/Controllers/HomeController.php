@@ -40,8 +40,13 @@ class HomeController extends Controller
 
     //SHOW SINGLE PRODUCT
     public function show(Product $item){
+        $isLiked = $item->isLikedByUser(auth()->id());
+        $onCart = $item->isAddedtoCart(auth()->id());
+
         return view('products.show',[
-            "item" => $item
+            "item" => $item,
+            "isLiked" => $isLiked,
+            "onCart" => $onCart,
         ] );
     }
 
@@ -56,6 +61,7 @@ class HomeController extends Controller
             'product_name' => 'required',
             'description' => 'required',
             'unit_price' => 'required',
+            'availableQty' => 'required',
             'category' => ['required', 'not_in:Choose here'],
         ]);
 
